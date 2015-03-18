@@ -21,9 +21,7 @@ Route::get('users', function()
     return View::make('users');
 });
 
-Route::get('games', function()
-{
-    $games = User::all();
 
-    return View::make('games')->with('games', $games);
+Route::get('games', function() {
+	return Response::json(array('name' => 'Steve', 'state' => 'CA'));
 });
