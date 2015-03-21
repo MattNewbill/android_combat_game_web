@@ -16,12 +16,11 @@ Route::get('/', function()
 	return View::make('hello');
 });
 
-Route::get('users', function()
-{
-    return View::make('users');
-});
+Route::resource('users', 'UserController');
 
 
 Route::get('games', function() {
 	return Response::json(array('name' => 'Steve', 'state' => 'CA'));
 });
+
+?>
