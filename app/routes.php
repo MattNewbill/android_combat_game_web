@@ -19,8 +19,13 @@ Route::get('/', function()
 Route::resource('users', 'UserController');
 
 
-Route::get('games', function() {
-	return Response::json(array('name' => 'Steve', 'state' => 'CA'));
-});
+
+Route::get('users/get_is_valid_user_by_id/{id}', 'UserController@get_is_valid_user_by_id');
+
+//Route::post('users/create', 'UserController@create');
+
+Route::get('users', '');
+
+Route::post('users/create_user', 'UserController@create_user');
 
 ?>

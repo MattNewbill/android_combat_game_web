@@ -49,14 +49,48 @@ class UserController extends \BaseController {
                 ->withInput(Input::except('password'));
         } else {
             // store
-            $nerd = new User;
-            $nerd->name       = Input::get('name');
-            $nerd->save();
+            $user = new User;
+            $user->name       = Input::get('name');
+            $user->save();
 
-            // redirect
-            Session::flash('message', 'Successfully created user!');
-            return Redirect::to('users');
+            $insertedId = $user->id;
+
+		    return Response::json(array(
+		        'user_id' => $insertedId),
+		        200
+		    );
+
         }
+	}
+
+
+	public function create_user()
+	{
+		$data = Input::all();
+		$name = $data['name']; 
+
+		/*$rules = array(
+            'name'       => 'required',
+        );
+        $validator = Validator::make(Input::all(), $rules);
+
+        // process the login
+        if ($validator->fails()) {
+            return Redirect::to('users/create')
+                ->withErrors($validator)
+                ->withInput(Input::except('password'));
+        } else {*/
+            // store
+        $user = new User;
+        $user->name       = $name;
+        $user->save();
+
+        $insertedId = $user->id;
+
+	    return Response::json(array(
+	        'user_id' => $insertedId),
+	        200
+	    );
 	}
 
 
@@ -68,7 +102,32 @@ class UserController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+		// get the nerd
+        $user = User::where('user_id', $id)->first();
+
+        // show the view and pass the nerd to it
+        //return View::make('users.show')->with('user', $user);
+	  
+	    return Response::json(array(
+	        'error' => false,
+	        'user' => $user),
+	        200
+	    );
+	    
+	}
+
+	public function get_is_valid_user_by_id($id)
+	{
+		// get the nerd
+        $user = User::where('user_id', $id)->first();
+
+        // show the view and pass the nerd to it
+        //return View::make('users.show')->with('user', $user);
+	  	$is_valid = ($user != null) ? true : false;
+	    return Response::json(array(
+	        'is_valid' => $is_valid),
+	        200
+	    );
 	}
 
 
