@@ -1,6 +1,6 @@
 <?php
 
-class UserController extends \BaseController {
+class UserController extends BaseController {
 
 	/**
 	 * Display a listing of the resource.
@@ -33,35 +33,6 @@ class UserController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function store()
-	{
-		// validate
-        // read more on validation at http://laravel.com/docs/validation
-        $rules = array(
-            'name'       => 'required',
-        );
-        $validator = Validator::make(Input::all(), $rules);
-
-        // process the login
-        if ($validator->fails()) {
-            return Redirect::to('users/create')
-                ->withErrors($validator)
-                ->withInput(Input::except('password'));
-        } else {
-            // store
-            $user = new User;
-            $user->name       = Input::get('name');
-            $user->save();
-
-            $insertedId = $user->id;
-
-		    return Response::json(array(
-		        'user_id' => $insertedId),
-		        200
-		    );
-
-        }
-	}
 
 
 	public function create_user()
