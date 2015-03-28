@@ -61,6 +61,20 @@ class GameController extends BaseController {
 	    );
 	}
 
+	public function get_open_games()
+	{
+		$games = Game::where('is_active', '=', 1)
+    					->where('client_player_id', '!=', 0)->get();
+
+    	$success = (count($games) != 0) ? true : false;
+
+		return Response::json(array(
+	        'success' => $success,
+	        'games' => $games),
+	        200
+	    );
+	}
+
 	public function set_is_active() 
 	{
 		$data = Input::all();

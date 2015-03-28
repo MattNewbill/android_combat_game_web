@@ -26,6 +26,8 @@ Route::post('users/create_user', 'UserController@create_user');
 Route::post('games/create_game', 'GameController@create_game');
 Route::post('games/set_is_active', 'GameController@set_is_active');
 Route::post('games/join', 'GameController@join');
+Route::get('games/get_open_games', 'GameController@get_open_games');
+
 
 
 ?>
