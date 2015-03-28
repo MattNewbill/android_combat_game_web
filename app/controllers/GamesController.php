@@ -26,6 +26,7 @@ class GameController extends BaseController {
         $game->host_player_id = $host_player_id;
         $game->game_mode_id = $game_mode_id;
         $game->map_id = $map_id;
+        $game->is_active = 1;
         $game->save();
 
         $insertedId = $game->id;
@@ -64,7 +65,7 @@ class GameController extends BaseController {
 	public function get_open_games()
 	{
 		$games = Game::where('is_active', '=', 1)
-    					->where('client_player_id', '!=', 0)->get();
+    					->where('client_player_id', '=', 0)->get();
 
     	$success = (count($games) != 0) ? true : false;
 
