@@ -44,7 +44,8 @@ class GameController extends BaseController {
 		$game_id = $data['game_id'];
 		$password = isset($data['password']) ? $data['password'] : NULL;
 
-		$game = Game::findOrFail(1);
+		
+		$game = Game::find($game_id);
 
 		$join_successful;
 		if($game->client_player_id != null)
@@ -58,6 +59,20 @@ class GameController extends BaseController {
 
 	    return Response::json(array(
 	        'success' => $join_successful),
+	        200
+	    );
+	}
+
+	public function get_game() 
+	{
+		$data = Input::all();
+
+		$game_id = $data['game_id'];
+
+		$game = Game::find($game_id);
+
+		return Response::json(array(
+	        'game' => $game),
 	        200
 	    );
 	}
@@ -89,6 +104,51 @@ class GameController extends BaseController {
 
 		return Response::json(array(
 	        'success' => $join_successful),
+	        200
+	    );
+	}
+
+	public function get_turn() 
+	{
+		$data = Input::all();
+
+		$game_id = $data['game_id'];
+
+		$game = Game::find($game_id);
+
+		//$turns = $game->turns();
+
+		$fake_data = array(
+						"game_id" => "1",
+						"turn_number" => "1",
+						"host_user" => array(
+												"units" => array(
+																	array("row"=> "1", "col" => "1", "hp" => "100", "armor" => "100", "is_dead" => "0", "direction_facing" => "1", "name" => "AssaultAlpha"),
+																	array("row"=> "1", "col" => "2", "hp" => "100", "armor" => "100", "is_dead" => "0", "direction_facing" => "1", "name" => "JuggernautAlpha"),
+																	array("row"=> "1", "col" => "3", "hp" => "100", "armor" => "100", "is_dead" => "0", "direction_facing" => "1", "name" => "MedicAlpha")
+
+																  ),
+												"hit_indicators" => array(
+																			array("row"=> "1", "col" => "3", "direction" => "1"),
+																			array("row"=> "1", "col" => "2", "direction" => "1")
+																	)
+										      ),
+						"client_user" => array(
+												"units" => array(
+																	array("row"=> "5", "col" => "1", "hp" => "100", "armor" => "100", "is_dead" => "0", "direction_facing" => "1", "name" => "AssaultAlpha"),
+																	array("row"=> "6", "col" => "2", "hp" => "100", "armor" => "100", "is_dead" => "0", "direction_facing" => "1", "name" => "JuggernautAlpha"),
+																	array("row"=> "7", "col" => "3", "hp" => "100", "armor" => "100", "is_dead" => "0", "direction_facing" => "1", "name" => "MedicAlpha")
+
+																  ),
+												"hit_indicators" => array(
+																			array("row"=> "5", "col" => "3", "direction" => "1"),
+																			array("row"=> "6", "col" => "2", "direction" => "1")
+																	)
+										      )
+						);
+
+		return Response::json(array(
+	        'turn' => $fake_data),
 	        200
 	    );
 	}

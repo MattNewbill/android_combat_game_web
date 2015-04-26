@@ -4,7 +4,6 @@ use Illuminate\Auth\UserTrait;
 use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableTrait;
 use Illuminate\Auth\Reminders\RemindableInterface;
-
 class Game extends Eloquent {
 
 
@@ -20,5 +19,10 @@ class Game extends Eloquent {
 	 *
 	 * @var array
 	 */
+
+	public function turns()
+    {
+        return $this->hasMany('GameTurn');
+    }
 
 }
