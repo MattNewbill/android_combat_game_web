@@ -90,7 +90,8 @@ class UserController extends BaseController {
 	public function get_is_valid_user_by_id($id)
 	{
 		// get the nerd
-        $user = User::where('user_id', $id)->first();
+        
+		$user = User::find($id);
 
         // show the view and pass the nerd to it
         //return View::make('users.show')->with('user', $user);

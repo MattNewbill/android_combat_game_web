@@ -4,7 +4,7 @@ use Illuminate\Auth\UserTrait;
 use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableTrait;
 use Illuminate\Auth\Reminders\RemindableInterface;
-class Game extends Eloquent {
+class GameTurn extends Eloquent {
 
 
 	/**
@@ -12,7 +12,7 @@ class Game extends Eloquent {
 	 *
 	 * @var string
 	 */
-	protected $table = 'game';
+	protected $table = 'gameturn';
 
 	/**
 	 * The attributes excluded from the model's JSON form.
@@ -22,7 +22,7 @@ class Game extends Eloquent {
 
 	public function turns()
     {
-        return $this->belongsToMany('Turn', 'GameTurn', 'game_id', 'turn_id')->orderBy('turn_number','DESC');// <- this is the column name of the extra column we adding
+        return $this->hasMany('Turn', 'turn_id');
     }
 
 }

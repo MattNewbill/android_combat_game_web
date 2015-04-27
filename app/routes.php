@@ -29,6 +29,8 @@ Route::post('games/join', 'GameController@join');
 Route::get('games/get_open_games', 'GameController@get_open_games');
 Route::post('games/get_game', 'GameController@get_game');
 Route::post('games/get_turn', 'GameController@get_turn');
+Route::post('games/set_turn', 'GameController@set_turn');
+Route::post('games/get_turn_fake', 'GameController@get_turn_fake');
 
 
 
