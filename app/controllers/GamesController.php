@@ -222,6 +222,23 @@ class GameController extends BaseController {
 
 		$turn = $game->turns->first();
 
+		$turn->load(["client_units" => function($query) use ($turn) {
+			$query->wherePivot('user_id',$turn->client_user_id);
+		}]);
+
+		$turn->load(["host_units" => function($query) use ($turn) {
+			$query->wherePivot('user_id',$turn->host_user_id);
+		}]);
+
+		$turn->load(["client_hit_indicators" => function($query) use ($turn) {
+			$query->wherePivot('user_id',$turn->client_user_id);
+		}]);
+
+		$turn->load(["host_hit_indicators" => function($query) use ($turn) {
+			$query->wherePivot('user_id',$turn->host_user_id);
+		}]);
+
+		return $turn;
 
 		// $turn_id = $turn->id;
 		// $host_user_id = $turn['host_user_id'];
@@ -268,6 +285,7 @@ class GameController extends BaseController {
 	        'turn' => $turn),
 	        200
 	    );
+	}
 
 	    public function get_turn_fake() {
 	    	$fake_data = array(
@@ -302,7 +320,6 @@ class GameController extends BaseController {
 			        'turn' => $fake_data),
 			        200
 	    );
-	    }
 	}
 
 }

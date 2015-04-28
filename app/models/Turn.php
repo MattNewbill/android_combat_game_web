@@ -23,14 +23,19 @@ class Turn extends Eloquent {
 	 */
 
 	public function host_units() {
-
+		return $this->belongsToMany('Unit', 'UserUnit', 'turn_id', 'unit_id');
 	}
 
 	public function client_units() {
-				//return $this->belongsToMany('Turn', 'GameTurn', 'game_id', 'turn_id');// <- this is the column name of the extra column we adding
+		return $this->belongsToMany('Unit', 'UserUnit', 'turn_id', 'unit_id');
+	}
 
-		return $this->belongsToMany('Unit', 'UserUnit', 'turn_id', 'unit_id');// <- this is the column name of the extra column we adding
+	public function host_hit_indicators() {
+		return $this->belongsToMany('HitIndicator', 'UserHitIndicator', 'turn_id', 'hit_indicator_id');
+	}
 
+	public function client_hit_indicators() {
+		return $this->belongsToMany('HitIndicator', 'UserHitIndicator', 'turn_id', 'hit_indicator_id');
 	}
 
 }
